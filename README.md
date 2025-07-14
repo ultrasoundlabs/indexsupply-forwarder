@@ -40,7 +40,6 @@ INDEXSUPPLY_API_KEY=your-api-key
 
 ```json
 {
-  "apiKey": "ENV:INDEXSUPPLY_API_KEY",
   "maxParallel": 4,
   "retry": {
     "minMs": 1000,
