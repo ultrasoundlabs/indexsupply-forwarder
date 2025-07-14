@@ -1,0 +1,37 @@
+{
+  "maxParallel": 4,
+  "retry": {
+    "minMs": 1000,
+    "maxMs": 30000
+  },
+  "subscriptions": [
+    {
+      "name": "erc20Transfers",
+      "chainId": 8453,
+      "query": "select \"from\", \"to\", tokens from transfer",
+      "signatures": [
+        "Transfer(address indexed from, address indexed to, uint tokens)"
+      ],
+      "webhook": {
+        "url": "https://my-fn.vercel.app/api/transfer",
+        "method": "POST",
+        "headers": {
+          "x-source": "indexsupply"
+        }
+      },
+      "cursorFile": "./cursors/erc20Transfers.json",
+      "initialBlock": 1000000
+    },
+    {
+      "name": "uniV3Swaps",
+      "chainId": 8453,
+      "query": "select * from uniswap_v3_swap where token0 in ('WETH', 'USDC')",
+      "signatures": [],
+      "webhook": {
+        "url": "https://example.com/uni-swap"
+      },
+      "cursorFile": "./cursors/uniV3Swaps.json",
+      "initialBlock": 1000000
+    }
+  ]
+} 
